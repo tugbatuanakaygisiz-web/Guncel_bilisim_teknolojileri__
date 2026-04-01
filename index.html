@@ -3,70 +3,206 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Tuana - Veri Analizi ve Python Portfolyosu">
-    <title>Tuana | Portfolyo</title>
+    <meta name="description" content="Tuana'nın Haritası - Veri Analizi ve Python Portfolyosu">
+    <title>Tuana'nın Haritası | Portfolyo</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=Uncial+Antiqua&family=Special+Elite&display=swap" rel="stylesheet">
     <style>
-        /* ── Reset & Base ── */
+        /* ── Reset ── */
         *, *::before, *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        /* ── Parchment Background ── */
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0f0f0f;
-            color: #e0e0e0;
+            font-family: 'Special Elite', monospace;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            background-color: #2a2115;
+            background-image:
+                radial-gradient(ellipse at 20% 30%, rgba(90, 70, 40, 0.4) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 70%, rgba(60, 45, 25, 0.5) 0%, transparent 55%),
+                radial-gradient(ellipse at 50% 50%, rgba(110, 85, 50, 0.3) 0%, transparent 70%);
+            color: #3d2e1a;
+            position: relative;
         }
 
-        /* ── Container ── */
-        .container {
+        /* Parchment overlay texture via pseudo-element */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 3px,
+                    rgba(0, 0, 0, 0.015) 3px,
+                    rgba(0, 0, 0, 0.015) 4px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 5px,
+                    rgba(0, 0, 0, 0.01) 5px,
+                    rgba(0, 0, 0, 0.01) 6px
+                );
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ── Page Wrapper ── */
+        .page {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            width: 100%;
+            margin: 2rem;
+            padding: 3rem 2.5rem;
+            background: linear-gradient(
+                145deg,
+                #c4a96a,
+                #d4b97a 25%,
+                #bfa262 50%,
+                #d1b474 75%,
+                #c9a868
+            );
+            border-radius: 6px;
+            box-shadow:
+                0 0 0 3px #6b4f2a,
+                0 0 0 6px #3d2e1a,
+                0 8px 30px rgba(0, 0, 0, 0.6),
+                inset 0 0 60px rgba(80, 55, 20, 0.25);
+            /* Burnt / aged edges */
+            border: 2px solid #8b6d3a;
+        }
+
+        /* Stain marks on parchment */
+        .page::before {
+            content: '';
+            position: absolute;
+            top: 15%;
+            left: -5%;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(100, 70, 30, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .page::after {
+            content: '';
+            position: absolute;
+            bottom: 10%;
+            right: 5%;
+            width: 90px;
+            height: 90px;
+            background: radial-gradient(circle, rgba(80, 55, 20, 0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* ── Decorative Border Lines ── */
+        .inner-border {
+            border: 1px solid rgba(100, 70, 30, 0.3);
+            border-radius: 4px;
+            padding: 2.5rem 2rem;
+            position: relative;
+        }
+
+        .inner-border::before {
+            content: '⚡ ✦ ⚡';
+            position: absolute;
+            top: -0.7rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #c9a868;
+            padding: 0 1rem;
+            font-size: 0.8rem;
+            color: #6b4f2a;
+            letter-spacing: 0.5rem;
+        }
+
+        /* ── Header / Oath ── */
+        .oath {
+            font-family: 'Uncial Antiqua', cursive;
+            text-align: center;
+            font-size: 1.25rem;
+            line-height: 1.6;
+            color: #3d2e1a;
+            margin-bottom: 2.5rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.08);
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(100, 70, 30, 0.25);
+        }
+
+        .oath .highlight {
+            display: block;
+            font-family: 'MedievalSharp', cursive;
+            font-size: 0.95rem;
+            color: #5a3d1e;
+            margin-top: 0.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* ── Profile Section ── */
+        .profile-section {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 2.5rem;
-            padding: 3rem 1.5rem;
-            max-width: 720px;
-            width: 100%;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
         }
 
-        /* ── Profile Photo ── */
+        .photo-frame {
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            padding: 5px;
+            background: linear-gradient(135deg, #8b5e2f, #c9944a, #6b4226, #a07840, #8b5e2f);
+            box-shadow:
+                0 0 0 2px #3d2e1a,
+                0 4px 15px rgba(0, 0, 0, 0.3),
+                inset 0 0 8px rgba(0, 0, 0, 0.2);
+        }
+
         .profile-photo {
-            width: 160px;
-            height: 160px;
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid rgba(255, 255, 255, 0.12);
+            border: 2px solid #5a3d1e;
         }
 
-        /* ── Text ── */
-        .name {
-            font-size: 1.75rem;
-            font-weight: 600;
-            letter-spacing: -0.02em;
-            color: #ffffff;
+        .profile-name {
+            font-family: 'MedievalSharp', cursive;
+            font-size: 1.6rem;
+            color: #3d2e1a;
+            letter-spacing: 0.04em;
         }
 
-        .subtitle {
-            font-size: 0.95rem;
-            font-weight: 300;
-            color: #888888;
-            margin-top: 0.35rem;
-            letter-spacing: 0.02em;
+        .profile-subtitle {
+            font-family: 'Special Elite', monospace;
+            font-size: 0.85rem;
+            color: #6b5534;
+            letter-spacing: 0.03em;
         }
 
-        .text-group {
+        /* ── Separator ── */
+        .separator {
             text-align: center;
+            font-size: 0.75rem;
+            color: #8b6d3a;
+            letter-spacing: 0.6rem;
+            margin-bottom: 2rem;
         }
 
-        /* ── Cards ── */
+        /* ── Button Cards ── */
         .cards {
             display: flex;
             gap: 1rem;
@@ -80,52 +216,122 @@
             justify-content: center;
             text-align: center;
             padding: 1.4rem 1rem;
-            background-color: #1a1a1a;
-            border: 1px solid #252525;
-            border-radius: 12px;
-            color: #d0d0d0;
-            font-size: 0.85rem;
-            font-weight: 400;
-            line-height: 1.45;
+            background: rgba(110, 80, 40, 0.12);
+            border: 1px solid rgba(100, 70, 30, 0.3);
+            border-radius: 6px;
+            color: #3d2e1a;
+            font-family: 'Special Elite', monospace;
+            font-size: 0.82rem;
+            line-height: 1.5;
             text-decoration: none;
-            transition: background-color 0.25s ease;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Ink blot hover effect */
+        .card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(45, 30, 10, 0.2) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.35s ease;
+            pointer-events: none;
         }
 
         .card:hover {
-            background-color: #242424;
+            background: rgba(85, 60, 25, 0.22);
+            box-shadow: inset 0 0 20px rgba(50, 35, 15, 0.15);
+        }
+
+        .card:hover::after {
+            opacity: 1;
+        }
+
+        /* ── Footer ── */
+        .footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(100, 70, 30, 0.2);
+            font-family: 'MedievalSharp', cursive;
+            font-size: 0.75rem;
+            color: #8b6d3a;
+            letter-spacing: 0.08em;
         }
 
         /* ── Responsive ── */
-        @media (max-width: 600px) {
+        @media (max-width: 650px) {
+            .page {
+                margin: 1rem;
+                padding: 2rem 1.2rem;
+            }
+
+            .inner-border {
+                padding: 1.5rem 1rem;
+            }
+
+            .oath {
+                font-size: 1rem;
+            }
+
             .cards {
                 flex-direction: column;
             }
 
-            .profile-photo {
-                width: 130px;
-                height: 130px;
+            .photo-frame {
+                width: 140px;
+                height: 140px;
             }
 
-            .name {
-                font-size: 1.5rem;
+            .profile-name {
+                font-size: 1.3rem;
             }
         }
     </style>
 </head>
 <body>
-    <main class="container">
-        <img src="profil/dobby.jpg" alt="Tuana" class="profile-photo">
+    <div class="page">
+        <div class="inner-border">
 
-        <div class="text-group">
-            <h1 class="name">Tuana</h1>
-            <p class="subtitle">Veri Analizi ve Python Portfolyosu</p>
+            <!-- Oath Header -->
+            <h1 class="oath">
+                "Ciddiyetimden Tamamen Arındığıma Yemin Ederim"
+                <span class="highlight">— Tuana'nın Haritası —</span>
+            </h1>
+
+            <!-- Profile -->
+            <div class="profile-section">
+                <div class="photo-frame">
+                    <img src="profil/dobby.jpg" alt="Tuana" class="profile-photo">
+                </div>
+                <h2 class="profile-name">Tuana</h2>
+                <p class="profile-subtitle">Veri Analizi ve Python Portfolyosu</p>
+            </div>
+
+            <!-- Separator -->
+            <div class="separator">✦ — ✦ — ✦</div>
+
+            <!-- Navigation Cards -->
+            <nav class="cards">
+                <a href="regression_game.html" class="card">
+                    Görev 2: İleri Düzey İksir Yapımı (Regresyon Mantığı)
+                </a>
+                <a href="3. hafta/veri_gorsellestirme.png" class="card">
+                    Kehanet Küresi Analizi (Veri Dağılım Grafiği)
+                </a>
+                <a href="3. hafta/data.csv" class="card">
+                    500 Ruhun Kayıtlı Parşömeni (Ham CSV Verisi)
+                </a>
+            </nav>
+
+            <!-- Footer -->
+            <div class="footer">
+                Yaramazlık Tamam ✦ Tuana Anakaygısız
+            </div>
+
         </div>
-
-        <nav class="cards">
-            <a href="regression_game.html" class="card">Görev 2: Etkileşimli Uygulama</a>
-            <a href="3. hafta/veri_gorsellestirme.png" class="card">Görev 7: Normal Dağılım Analizi</a>
-            <a href="3. hafta/data.csv" class="card">Görev 7: Ham Veri Seti</a>
-        </nav>
-    </main>
+    </div>
 </body>
 </html>
