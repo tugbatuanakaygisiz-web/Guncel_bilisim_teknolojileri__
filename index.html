@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tuana - Veri Analizi ve Python Portfolyosu">
+    <title>Tuana | Portfolyo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ── Reset & Base ── */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f0f0f;
+            color: #e0e0e0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* ── Container ── */
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2.5rem;
+            padding: 3rem 1.5rem;
+            max-width: 720px;
+            width: 100%;
+        }
+
+        /* ── Profile Photo ── */
+        .profile-photo {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.12);
+        }
+
+        /* ── Text ── */
+        .name {
+            font-size: 1.75rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #ffffff;
+        }
+
+        .subtitle {
+            font-size: 0.95rem;
+            font-weight: 300;
+            color: #888888;
+            margin-top: 0.35rem;
+            letter-spacing: 0.02em;
+        }
+
+        .text-group {
+            text-align: center;
+        }
+
+        /* ── Cards ── */
+        .cards {
+            display: flex;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        .card {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 1.4rem 1rem;
+            background-color: #1a1a1a;
+            border: 1px solid #252525;
+            border-radius: 12px;
+            color: #d0d0d0;
+            font-size: 0.85rem;
+            font-weight: 400;
+            line-height: 1.45;
+            text-decoration: none;
+            transition: background-color 0.25s ease;
+        }
+
+        .card:hover {
+            background-color: #242424;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 600px) {
+            .cards {
+                flex-direction: column;
+            }
+
+            .profile-photo {
+                width: 130px;
+                height: 130px;
+            }
+
+            .name {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <img src="profil/dobby.jpg" alt="Tuana" class="profile-photo">
+
+        <div class="text-group">
+            <h1 class="name">Tuana</h1>
+            <p class="subtitle">Veri Analizi ve Python Portfolyosu</p>
+        </div>
+
+        <nav class="cards">
+            <a href="regression_game.html" class="card">Görev 2: Etkileşimli Uygulama</a>
+            <a href="3. hafta/veri_gorsellestirme.png" class="card">Görev 7: Normal Dağılım Analizi</a>
+            <a href="3. hafta/data.csv" class="card">Görev 7: Ham Veri Seti</a>
+        </nav>
+    </main>
+</body>
+</html>
